@@ -6,6 +6,8 @@ public class Main {
     public static void main(String[] args) {
         MongoClient client = new MongoClient("localhost",27017); //with default server and port adress
         DB db = client.getDB( "REST2" );
+        //Creating Collections
+        MongoCollection<Document> userCollect = db.getCollection("users");
         DBCollection users = db.getCollection("usrs");
         DBCollection auth = db.getCollection("auth");
         // staticFiles.externalLocation("public");
