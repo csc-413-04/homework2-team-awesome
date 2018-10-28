@@ -14,10 +14,18 @@ public class Main {
         // calling get will make your app start listening for the GET path with the /hello endpoint
         get("/hello", (req, res) -> "Hello World");
         //newuser
-        get("/newuser/:user", (req, res) -> {
-           // System.out.println(req.)
-            return "hello " + req.params("user");
-        });
+        get("/newuser", (req, res)-> {
+          //Getting the username value
+          String username = req.queryParams("username");
+          System.out.print(username);
+          //Getting the pasword value
+          String password = req.queryParams("password");
+          Document document = new Document("username", username);
+          document.append("username", username).append("password", password);
+          userCollect.insertOne(document);
+          return "Added " + "Username: " + username + " Password: " + password;
+
+      });
         //user - Login
         get("/user", (req, res) -> "Login Failed");
 
