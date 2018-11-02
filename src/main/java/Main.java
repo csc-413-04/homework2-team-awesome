@@ -234,6 +234,9 @@ public class Main {
             MongoCursor<Document> token_cursor = token_finder.iterator();
             while (token_cursor.hasNext()) {
                 Document token_dummy = token_cursor.next();
+                if (token_dummy.get("token").equals(token)) {
+                    MongoIterable<Document> user_finder = userCollect.find();
+                    MongoCursor<Document> user_cursor = user_finder.iterator();
                 if (user_dummy.get("username").equals(token_dummy.get("user"))) {
                 ArrayList<Object> friend_list = (ArrayList<Object>) user_dummy.get("friends");
                 for (int i = 0; i < friend_list.size(); i++) {
