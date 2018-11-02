@@ -83,6 +83,11 @@ public class Main {
         return output;
       });
       //user - Login
-      get("/user", (req, res) -> req.params("user"));
+       get("/login", (req, res) -> {});
+    
+
+
+
+
     }
 }
