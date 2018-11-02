@@ -193,6 +193,12 @@ public class Main {
                                         }
 
                                     }
+                                    if (output != "You have already added this user into your friend list") {
+                                        doc.add(friend_doc.get("username"));
+                                        output = "okay";
+                                        System.out.println(doc);
+                                        break;
+                                    }
 
         }
     
