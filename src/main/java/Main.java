@@ -10,6 +10,14 @@ import static spark.Spark.*;
 import java.util.ArrayList;
 import java.util.Date;
 public class Main {
+    public static int number = 0;
+
+    // increments id for every username added to the database
+    public static int AutoID() {
+        number++;
+        return number;
+    }
+
 
     public static void main(String[] args) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
