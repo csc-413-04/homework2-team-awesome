@@ -28,6 +28,10 @@ public class Main {
       // staticFiles.externalLocation("public");
       // http://sparkjava.com/documentation
       port(4321);
+
+      //Map<String, Object> map = new HashMap<String, Object>();
+      //BasicBSONList map = new BasicBSONList();
+
       // calling get will make your app start listening for the GET path with the /hello endpoint
       get("/hello", (req, res) -> "Hello World");
 
