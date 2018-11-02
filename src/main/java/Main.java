@@ -62,6 +62,7 @@ public class Main {
                     count = (int) dummy.get("id");
                 }
             }
+            document.append("username", username).append("password", password).append("id", count + 1);
           }
           document.append("username", username).append("password", password);
           userCollect.insertOne(document);
