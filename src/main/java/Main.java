@@ -92,8 +92,14 @@ public class Main {
             System.out.println(password);
             MongoIterable<Document> iterable = userCollect.find();
             MongoCursor<Document> cursor = iterable.iterator();
- 
+            output = "fail";
+            //while there's still documents in the collection...
+            while (cursor.hasNext()) {
+                
+                //System.out.println(doc);
 
+                //
+            }
        });
     
 
