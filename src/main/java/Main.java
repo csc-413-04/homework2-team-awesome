@@ -194,12 +194,12 @@ public class Main {
 
                                     for (int i = 0; i < doc.size(); i++) {
                                         if (friend_doc.get("username").equals(doc.get(i))) {
-                                            output = "You have already added this user into your friend list";
+                                            count = 2;
                                             break;
                                         }
 
                                     }
-                                    if (output != "You have already added this user into your friend list") {
+                                    if (count != 2) {
                                         count = 1;
                                         doc.add(friend_doc.get("username"));
                                         output = "okay";
