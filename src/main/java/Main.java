@@ -111,7 +111,20 @@ public class Main {
                 output = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
                 MongoIterable<Document> date_i = authCollect.find();
                 MongoCursor<Document> date_c = date_i.iterator();
+                //iterate through the authCollect to check for previous token for the user
+                while (date_c.hasNext()) {
+                    Document token = date_c.next();
+                    System.out.println(token.get("user"));
+                    // deletes the document if there are previous tokens
+                    if (token.get("user").equals(username)) {
+                        authCollect.findOneAndDelete(token);
+                    }
+                }
+
+
+
             }
+            
 
        });
     
