@@ -67,6 +67,14 @@ public class Main {
           document.append("friends", map);
           MongoIterable<Document> findUser = userCollect.find();
           MongoCursor<Document> userCursor = findUser.iterator();
+          //checks if username already exist in the collection
+          while (userCursor.hasNext()) {
+            Document dummy_user = userCursor.next();
+            if (dummy_user.get("username").equals(username)) {
+                output = "username already exists";
+                break;
+            }
+        }
 
 
 
