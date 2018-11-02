@@ -229,7 +229,9 @@ public class Main {
         };
         get("friends", (req, res) -> {
             String output = "";
-            String token = req.queryParams("token");           
+            String token = req.queryParams("token");
+            MongoIterable<Document> token_finder = authCollect.find();
+            MongoCursor<Document> token_cursor = token_finder.iterator();     
         });
 
 
