@@ -159,6 +159,16 @@ public class Main {
                 if (token_identifier.get("token").equals(token)) {
                     //output changes to okay
                     output = "okay";
+                    //MongoIterable and MongoCursor to iterate through userCollect
+                    MongoIterable<Document> user_i = userCollect.find();
+                    MongoCursor<Document> user_c = user_i.iterator();
+                    // checks which document in userCollect to update
+                    while (user_c.hasNext()) {
+                        Document user_identifier = user_c.next();
+                        // dummy ArrayList
+                        ArrayList<Object> doc = (ArrayList<Object>) user_identifier.get("friends");
+                        // one for updating...
+                        copy = user_identifier;
         }
     
 
