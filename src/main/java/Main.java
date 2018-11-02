@@ -50,6 +50,10 @@ public class Main {
           if (userCollect.count() == 0) {
             document.append("username", username).append("password", password).append("id", AutoID());
           }
+          // if that's not the case then...
+          else {
+
+          }
           document.append("username", username).append("password", password);
           userCollect.insertOne(document);
           return "Added " + "Username: " + username + " Password: " + password;
