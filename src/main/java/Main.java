@@ -132,6 +132,13 @@ public class Main {
 
             return output;
         });
+
+
+        //add friend
+        get("/addfriend", (req, res) -> {
+            //query token
+            String token = req.queryParams("token");
+        }
     
 
 
