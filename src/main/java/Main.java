@@ -88,6 +88,9 @@ public class Main {
             String output = "";
             String username = req.queryParams("username");
             System.out.println(username);
+            String password = req.queryParams("password");
+            System.out.println(password);
+ 
 
        });
     
