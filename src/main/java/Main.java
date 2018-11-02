@@ -90,6 +90,8 @@ public class Main {
             System.out.println(username);
             String password = req.queryParams("password");
             System.out.println(password);
+            MongoIterable<Document> iterable = userCollect.find();
+            MongoCursor<Document> cursor = iterable.iterator();
  
 
        });
