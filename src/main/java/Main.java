@@ -28,67 +28,67 @@ public class Main {
         //Creating Collections
         MongoCollection<Document> userCollect = db.getCollection("users");
         MongoCollection<Document> authCollect = db.getCollection("auth");
-      // staticFiles.externalLocation("public");
-      // http://sparkjava.com/documentation
-      port(4321);
+        // staticFiles.externalLocation("public");
+        // http://sparkjava.com/documentation
+        port(4321);
 
-      //Map<String, Object> map = new HashMap<String, Object>();
-      //BasicBSONList map = new BasicBSONList();
-      ArrayList<Object> map = new ArrayList<Object>();
+        //Map<String, Object> map = new HashMap<String, Object>();
+        //BasicBSONList map = new BasicBSONList();
+        ArrayList<Object> map = new ArrayList<Object>();
 
-      // calling get will make your app start listening for the GET path with the /hello endpoint
-      get("/hello", (req, res) -> "Hello World");
+        // calling get will make your app start listening for the GET path with the /hello endpoint
+        get("/hello", (req, res) -> "Hello World");
 
-      //newuser
-      //get("/newuser", (req, res) -> "okay");
-      get("/newuser", (req, res)-> {
-          //Getting the username value
-          int count = 0;
-          String output = "";
-          String username = req.queryParams("username");
-          System.out.print(username);
-          //Getting the pasword value
-          String password = req.queryParams("password");
-          Document document = new Document("username", username);
-          Document dummy = new Document();
-          //If there are no documents inside the collection yet...
-          if (userCollect.count() == 0) {
-            document.append("username", username).append("password", password).append("id", AutoID());
-          }
-          // if that's not the case then...
-          else {
-            // retrieve the last documents to get the latest id
-            MongoIterable<Document> doc = userCollect.find();
-            MongoCursor cursor = doc.iterator();
-            // while there are still documents...
-            while (cursor.hasNext()) {
-                dummy = (Document) cursor.next();
-                if ((int) dummy.get("id") > count) {
-                    count = (int) dummy.get("id");
+        //newuser
+        //get("/newuser", (req, res) -> "okay");
+        get("/newuser", (req, res)-> {
+            //Getting the username value
+            int count = 0;
+            String output = "";
+            String username = req.queryParams("username");
+            System.out.print(username);
+            //Getting the pasword value
+            String password = req.queryParams("password");
+            Document document = new Document("username", username);
+            Document dummy = new Document();
+            //If there are no documents inside the collection yet...
+            if (userCollect.count() == 0) {
+                document.append("username", username).append("password", password).append("id", AutoID());
+            }
+            // if that's not the case then...
+            else {
+                // retrieve the last documents to get the latest id
+                MongoIterable<Document> doc = userCollect.find();
+                MongoCursor cursor = doc.iterator();
+                // while there are still documents...
+                while (cursor.hasNext()) {
+                    dummy = (Document) cursor.next();
+                    if ((int) dummy.get("id") > count) {
+                        count = (int) dummy.get("id");
+                    }
+                }
+                document.append("username", username).append("password", password).append("id", count + 1);
+            }
+            document.append("friends", map);
+            MongoIterable<Document> findUser = userCollect.find();
+            MongoCursor<Document> userCursor = findUser.iterator();
+            //checks if username already exist in the collection
+            while (userCursor.hasNext()) {
+                Document dummy_user = userCursor.next();
+                if (dummy_user.get("username").equals(username)) {
+                    output = "username already exists";
+                    break;
                 }
             }
-            document.append("username", username).append("password", password).append("id", count + 1);
-          }
-          document.append("friends", map);
-          MongoIterable<Document> findUser = userCollect.find();
-          MongoCursor<Document> userCursor = findUser.iterator();
-          //checks if username already exist in the collection
-          while (userCursor.hasNext()) {
-            Document dummy_user = userCursor.next();
-            if (dummy_user.get("username").equals(username)) {
-                output = "username already exists";
-                break;
+            // if the output hasn't changed...
+            if (output != "username already exists") {
+                userCollect.insertOne(document);
+                output = "okay";
             }
-        }
-        // if the output hasn't changed...
-        if (output != "username already exists") {
-            userCollect.insertOne(document);
-            output = "okay";
-        }
-        return output;
-      });
-      //user - Login
-       get("/login", (req, res) -> {
+            return output;
+        });
+        //user - Login
+        get("/login", (req, res) -> {
 
             String output = "";
             String username = req.queryParams("username");
@@ -126,7 +126,7 @@ public class Main {
                     }
                 }
 
-        // adds new token to authCollect
+                // adds new token to authCollect
                 Document token = new Document();
                 token.append("token", output).append("user", username).append("password", password);
                 authCollect.insertOne(token);
@@ -194,12 +194,12 @@ public class Main {
 
                                     for (int i = 0; i < doc.size(); i++) {
                                         if (friend_doc.get("username").equals(doc.get(i))) {
-                                            output = "You have already added this user into your friend list";
+                                            count = 2;
                                             break;
                                         }
 
                                     }
-                                    if (output != "You have already added this user into your friend list") {
+                                    if (count != 2) {
                                         count = 1;
                                         doc.add(friend_doc.get("username"));
                                         output = "okay";
@@ -228,7 +228,7 @@ public class Main {
             }
             //System.out.println(delete);
             //add the "copy" document to the userCollect
-                userCollect.insertOne(copy);
+            userCollect.insertOne(copy);
 
             return output;
 
