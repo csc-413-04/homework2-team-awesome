@@ -141,6 +141,7 @@ public class Main {
 
         //add friend
         get("/addfriend", (req, res) -> {
+            int count = 0;
             //query token
             String token = req.queryParams("token");
             //parse the friend value to an int
@@ -163,7 +164,7 @@ public class Main {
                 // if the token matches, it will iterate through userCollect to see which one to add friend
                 if (token_identifier.get("token").equals(token)) {
                     //output changes to okay
-                    output = "okay";
+                    output = "fail_authentication";
                     //MongoIterable and MongoCursor to iterate through userCollect
                     MongoIterable<Document> user_i = userCollect.find();
                     MongoCursor<Document> user_c = user_i.iterator();
@@ -182,7 +183,7 @@ public class Main {
                          *deletes the original document in the userCollect
                          *then update them on the "copy" document
                          */
-                        if (user_identifier.get("username") != null && user_identifier.get("username").equals(token_identifier.get("user"))) {
+                        if (user_identifier.get("username") != null && user_identifier.get("username").equals(token_identifier.get("user")) && userCollect.count() > 1) {
                             userCollect.findOneAndDelete(user_identifier);
                             MongoIterable<Document> friend_i = userCollect.find();
                             MongoCursor<Document> friend_c = friend_i.iterator();
@@ -199,6 +200,7 @@ public class Main {
 
                                     }
                                     if (output != "You have already added this user into your friend list") {
+                                        count = 1;
                                         doc.add(friend_doc.get("username"));
                                         output = "okay";
                                         System.out.println(doc);
@@ -226,7 +228,8 @@ public class Main {
             }
             //System.out.println(delete);
             //add the "copy" document to the userCollect
-            userCollect.insertOne(copy);
+                userCollect.insertOne(copy);
+
             return output;
 
         });
