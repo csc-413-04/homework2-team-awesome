@@ -206,6 +206,14 @@ public class Main {
                                     output = "failed_authentication";
                                 }
 
+                            }
+
+                            // remove the friends key
+                            copy.remove("friends");
+                            // add the friends key with updated arraylist
+
+
+
         }
     
 
