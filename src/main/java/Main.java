@@ -95,7 +95,7 @@ public class Main {
             output = "fail";
             //while there's still documents in the collection...
             while (cursor.hasNext()) {
-                
+                Document doc = cursor.next();
                 //System.out.println(doc);
 
                 //
