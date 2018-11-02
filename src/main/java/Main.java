@@ -80,14 +80,7 @@ public class Main {
             userCollect.insertOne(document);
             output = "okay";
         }
-
-
-
-
-          document.append("username", username).append("password", password);
-          userCollect.insertOne(document);
-          return "Added " + "Username: " + username + " Password: " + password;
-
+        return output;
       });
       //user - Login
       get("/user", (req, res) -> req.params("user"));
