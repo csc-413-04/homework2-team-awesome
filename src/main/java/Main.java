@@ -199,6 +199,12 @@ public class Main {
                                         System.out.println(doc);
                                         break;
                                     }
+                                }
+                                // throws an error if the user adds him/herself into the friendlist
+
+                                else {
+                                    output = "failed_authentication";
+                                }
 
         }
     
