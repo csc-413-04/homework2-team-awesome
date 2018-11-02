@@ -121,12 +121,17 @@ public class Main {
                     }
                 }
 
-
-
+        // adds new token to authCollect
+                Document token = new Document();
+                token.append("token", output).append("user", username).append("password", password);
+                authCollect.insertOne(token);
             }
-            
+            //Document document = new Document("username", username);
+            //document.append("username", username).append("password",password);
 
-       });
+
+            return output;
+        });
     
 
 
