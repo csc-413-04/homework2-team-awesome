@@ -83,7 +83,13 @@ public class Main {
         return output;
       });
       //user - Login
-       get("/login", (req, res) -> {});
+       get("/login", (req, res) -> {
+
+            String output = "";
+            String username = req.queryParams("username");
+            System.out.println(username);
+
+       });
     
 
 
