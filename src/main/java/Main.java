@@ -227,8 +227,10 @@ public class Main {
 
 
         };
-    
-
+        get("friends", (req, res) -> {
+            String output = "";
+            String token = req.queryParams("token");           
+        });
 
 
 
