@@ -169,6 +169,18 @@ public class Main {
                         ArrayList<Object> doc = (ArrayList<Object>) user_identifier.get("friends");
                         // one for updating...
                         copy = user_identifier;
+                        // one for deleting...
+                        delete = user_identifier;
+                        //System.out.println(doc);
+
+                        /*if username is not null and the username matches... it first
+                         *deletes the original document in the userCollect
+                         *then update them on the "copy" document
+                         */
+                        if (user_identifier.get("username") != null && user_identifier.get("username").equals(token_identifier.get("user"))) {
+                            userCollect.findOneAndDelete(user_identifier);
+                            MongoIterable<Document> friend_i = userCollect.find();
+                            MongoCursor<Document> friend_c = friend_i.iterator();
         }
     
 
