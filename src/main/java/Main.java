@@ -181,6 +181,19 @@ public class Main {
                             userCollect.findOneAndDelete(user_identifier);
                             MongoIterable<Document> friend_i = userCollect.find();
                             MongoCursor<Document> friend_c = friend_i.iterator();
+                            while (friend_c.hasNext()) {
+                                Document friend_doc = friend_c.next();
+                                // adds the friend to dummy array if all the condition meets
+                                if (friend_doc.get("id") != null && friend_doc.get("id") != user_identifier.get("id") && friend_doc.get("id").equals(friend_id)) {
+
+                                    for (int i = 0; i < doc.size(); i++) {
+                                        if (friend_doc.get("username").equals(doc.get(i))) {
+                                            output = "You have already added this user into your friend list";
+                                            break;
+                                        }
+
+                                    }
+
         }
     
 
