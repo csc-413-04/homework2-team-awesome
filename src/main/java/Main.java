@@ -65,7 +65,8 @@ public class Main {
             document.append("username", username).append("password", password).append("id", count + 1);
           }
           document.append("friends", map);
-
+          MongoIterable<Document> findUser = userCollect.find();
+          MongoCursor<Document> userCursor = findUser.iterator();
 
 
 
