@@ -102,6 +102,8 @@ public class Main {
                 if (doc.get("username") != null && doc.get("password") != null && doc.get("username").equals(username) && doc.get("password").equals(password)) {
                     System.out.println(doc.get("username"));
                     System.out.println(doc.get("password"));
+                    output = "success";
+                    break;
                 }
             }
        });
