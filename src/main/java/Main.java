@@ -31,6 +31,7 @@ public class Main {
 
       //Map<String, Object> map = new HashMap<String, Object>();
       //BasicBSONList map = new BasicBSONList();
+      ArrayList<Object> map = new ArrayList<Object>();
 
       // calling get will make your app start listening for the GET path with the /hello endpoint
       get("/hello", (req, res) -> "Hello World");
