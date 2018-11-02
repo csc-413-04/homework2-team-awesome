@@ -2,7 +2,9 @@ package main.java;
 //import com.mongodb.MongoClient;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.MongoIterable;
 import org.bson.Document;
 
 import java.text.SimpleDateFormat;
@@ -237,10 +239,13 @@ public class Main {
                 if (token_dummy.get("token").equals(token)) {
                     MongoIterable<Document> user_finder = userCollect.find();
                     MongoCursor<Document> user_cursor = user_finder.iterator();
-                if (user_dummy.get("username").equals(token_dummy.get("user"))) {
-                ArrayList<Object> friend_list = (ArrayList<Object>) user_dummy.get("friends");
-                for (int i = 0; i < friend_list.size(); i++) {
-                    output = output.concat((String) friend_list.get(i) + "<br/>");
+                    while (user_cursor.hasNext()) {
+                        Document user_dummy = user_cursor.next();
+                        if (user_dummy.get("username").equals(token_dummy.get("user"))) {
+                            ArrayList<Object> friend_list = (ArrayList<Object>) user_dummy.get("friends");
+                            for (int i = 0; i < friend_list.size(); i++) {
+                                output = output.concat((String) friend_list.get(i) + "<br/>");
+
                             }
                         }
                     }
