@@ -144,6 +144,13 @@ public class Main {
             ArrayList<Integer> copy_f = new ArrayList<Integer>();
             //default output
             String output = "failed_authentication";
+            //MongoIterable and Mongocursore to iterate through the autoCollect
+            MongoIterable<Document> token_i = authCollect.find();
+            MongoCursor<Document> token_c = token_i.iterator();
+            // Document for updating purposes
+            Document copy = new Document();
+            // Document for deleting purposes
+            Document delete = new Document();
         }
     
 
