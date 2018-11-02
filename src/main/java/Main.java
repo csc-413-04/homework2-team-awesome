@@ -106,6 +106,13 @@ public class Main {
                     break;
                 }
             }
+//IF the output = success...
+            if (output == "success") {
+                output = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                MongoIterable<Document> date_i = authCollect.find();
+                MongoCursor<Document> date_c = date_i.iterator();
+            }
+
        });
     
 
