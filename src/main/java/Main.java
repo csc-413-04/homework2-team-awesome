@@ -151,6 +151,14 @@ public class Main {
             Document copy = new Document();
             // Document for deleting purposes
             Document delete = new Document();
+
+            // While there are documents in authCollect...
+            while (token_c.hasNext()) {
+                Document token_identifier = token_c.next();
+                // if the token matches, it will iterate through userCollect to see which one to add friend
+                if (token_identifier.get("token").equals(token)) {
+                    //output changes to okay
+                    output = "okay";
         }
     
 
