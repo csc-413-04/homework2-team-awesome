@@ -1,4 +1,4 @@
-package main.java;
+//package main.java;
 //import com.mongodb.MongoClient;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -27,6 +27,7 @@ public class Main {
 
         //Creating Collections
         MongoCollection<Document> userCollect = db.getCollection("users");
+        MongoCollection<Document> authCollect = db.getCollection("auth");
       // staticFiles.externalLocation("public");
       // http://sparkjava.com/documentation
       port(4321);
@@ -42,6 +43,8 @@ public class Main {
       //get("/newuser", (req, res) -> "okay");
       get("/newuser", (req, res)-> {
           //Getting the username value
+          int count = 0;
+          String output = "";
           String username = req.queryParams("username");
           System.out.print(username);
           //Getting the pasword value
@@ -226,9 +229,7 @@ public class Main {
             userCollect.insertOne(copy);
             return output;
 
-
-
-        };
+        });
         get("friends", (req, res) -> {
             String output = "";
             String token = req.queryParams("token");
