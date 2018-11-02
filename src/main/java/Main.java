@@ -45,6 +45,11 @@ public class Main {
           //Getting the pasword value
           String password = req.queryParams("password");
           Document document = new Document("username", username);
+          Document dummy = new Document();
+          //If there are no documents inside the collection yet...
+          if (userCollect.count() == 0) {
+            document.append("username", username).append("password", password).append("id", AutoID());
+          }
           document.append("username", username).append("password", password);
           userCollect.insertOne(document);
           return "Added " + "Username: " + username + " Password: " + password;
