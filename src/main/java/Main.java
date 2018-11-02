@@ -231,7 +231,19 @@ public class Main {
             String output = "";
             String token = req.queryParams("token");
             MongoIterable<Document> token_finder = authCollect.find();
-            MongoCursor<Document> token_cursor = token_finder.iterator();     
+            MongoCursor<Document> token_cursor = token_finder.iterator();
+            while (token_cursor.hasNext()) {
+                Document token_dummy = token_cursor.next();
+                if (user_dummy.get("username").equals(token_dummy.get("user"))) {
+                ArrayList<Object> friend_list = (ArrayList<Object>) user_dummy.get("friends");
+                for (int i = 0; i < friend_list.size(); i++) {
+                    output = output.concat((String) friend_list.get(i) + "<br/>");
+                            }
+                        }
+                    }
+                }
+            }
+            return output;
         });
 
 
