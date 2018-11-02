@@ -211,6 +211,11 @@ public class Main {
                             // remove the friends key
                             copy.remove("friends");
                             // add the friends key with updated arraylist
+                            copy.append("friends", doc);
+                            System.out.println(copy);
+                            break;
+                        }
+                    }
 
 
 
