@@ -75,7 +75,11 @@ public class Main {
                 break;
             }
         }
-
+        // if the output hasn't changed...
+        if (output != "username already exists") {
+            userCollect.insertOne(document);
+            output = "okay";
+        }
 
 
 
