@@ -138,6 +138,12 @@ public class Main {
         get("/addfriend", (req, res) -> {
             //query token
             String token = req.queryParams("token");
+            //parse the friend value to an int
+            int friend_id = Integer.parseInt(req.queryParams("friend"));
+            //arraylist to store the updated "friends" key
+            ArrayList<Integer> copy_f = new ArrayList<Integer>();
+            //default output
+            String output = "failed_authentication";
         }
     
 
