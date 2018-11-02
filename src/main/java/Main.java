@@ -217,9 +217,16 @@ public class Main {
                         }
                     }
 
+                }
+            }
+            //System.out.println(delete);
+            //add the "copy" document to the userCollect
+            userCollect.insertOne(copy);
+            return output;
 
 
-        }
+
+        };
     
 
 
