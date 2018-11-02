@@ -55,6 +55,13 @@ public class Main {
             // retrieve the last documents to get the latest id
             MongoIterable<Document> doc = userCollect.find();
             MongoCursor cursor = doc.iterator();
+            // while there are still documents...
+            while (cursor.hasNext()) {
+                dummy = (Document) cursor.next();
+                if ((int) dummy.get("id") > count) {
+                    count = (int) dummy.get("id");
+                }
+            }
           }
           document.append("username", username).append("password", password);
           userCollect.insertOne(document);
