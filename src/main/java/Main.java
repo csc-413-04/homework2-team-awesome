@@ -52,7 +52,9 @@ public class Main {
           }
           // if that's not the case then...
           else {
-
+            // retrieve the last documents to get the latest id
+            MongoIterable<Document> doc = userCollect.find();
+            MongoCursor cursor = doc.iterator();
           }
           document.append("username", username).append("password", password);
           userCollect.insertOne(document);
